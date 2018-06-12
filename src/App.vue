@@ -1,11 +1,13 @@
 <template>
-  <div id="app">
-    <div class="topNav">
-      <i class="fa fa-bars" aria-hidden="true"></i>
-      <span>一个图文</span>
+  <div id="app" @click="show =false">
+    <div class="topNav" >
+      <i class="fa fa-bars" aria-hidden="true" @click.stop="change"></i>
+      <span>一个</span>
       <i class="fa fa-search" aria-hidden="true"></i>
     </div>
-    <Nav></Nav>
+    <transition name="slide-fade">
+      <Nav v-if="show" @change="change"></Nav>
+    </transition>
     <Search></Search>
     <router-view/>
   </div>
@@ -14,9 +16,21 @@
 <script>
 import Nav from '@/components/Nav';
 import Search from '@/components/Search';
+// import axios from 'axios';
 export default {
   name: 'App',
-  components: { Nav,Search }
+
+  components: { Nav,Search },
+    data() {
+        return {
+            show: false
+        };
+    },
+    methods:{
+        change(){
+          this.show = !this.show
+        }
+    }
 }
 </script>
 
@@ -27,6 +41,7 @@ export default {
   }
 
   .topNav{
+
     height: 54px;
     font-size: 14px;
     color: #333;
@@ -36,7 +51,7 @@ export default {
     width: 100%;
     line-height: 54px;
     text-align: center;
-z-index: 100;
+    z-index: 1005;
   }
   .topNav .fa{
     font-size: 21px;

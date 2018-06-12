@@ -2,31 +2,33 @@
   <div class="home">
     <!--<router-link  to="h1"  @backd="show" @click="change">跳转到 home 的 h1</router-link>-->
     <!--<router-view></router-view>-->
+
     <div class="home-img-box">
-      <img src="../images/login_bg.png"/>
-      <div class="home-text-box">
-        <p class="day">12</p>
-        <p class="month">vol.2075&nbsp;|&nbsp;Jun 2018</p>
-        <p class="content-short">忍心怎么变硬呢？离家后跟父母渐行渐远，不是事事都说；毕业时哭成泪人，之后或再也没见；或见面是路人，爱错了人</p>
+      <div class="home-img-boxbg"></div>
+      <img :src="imgSrc"/>
+      <div class="home-text-box" @click="change" >
+        <p class="day">{{day}}</p>
+        <p class="month">{{volume}}&nbsp;|&nbsp;{{itemDate}}</p>
+        <p class="content-short">{{forward}}</p>
         <span class="span-angle-down"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
       </div>
     </div>
      <div class="home-text" v-for="item in items">
         <div class="aticle">
-        <p><a href="#" class="home-link">阅读 |</a></p>
+        <p><a href="#" class="home-link" >{{item.msg}} |</a></p>
           <div class="aticle-link">
-            <p class="aticle-title">死点</p>
-            <p class="aticle-auther">作者/王元 </p>
+            <p class="aticle-title">{{title}}</p>
+            <p class="aticle-auther">作者/{{author}} </p>
             <p class="aticle-content">
-              <i >时间足够你爱</i>
-              <i>——海因莱因</i>
+              <i >{{itemforward}}</i>
+              <!--<i>——海因莱因</i>-->
             </p>
             <p class="aticle-more"><a href="">阅读全文</a></p>
           </div>
         </div>
         <div class="question"></div>
      </div>
-    <a href="" class="home-more">更多内容
+    <a href="http://localhost:8083/#/one" class="home-more" >更多内容
       <i class="fa fa-angle-right" aria-hidden="true"></i>
     </a>
     <div class="bottom">
@@ -40,13 +42,60 @@
 </template>
 
 <script>
+
 export default {
   name: 'Home',
+    // router,
+    mounted(){
+
+      let that=this
+        let url='http://v3.wufazhuce.com:8000/api/channel/one/0/%E5%8C%97%E4%BA%AC%E5%B8%82';
+        this.$http.get(url).then(function (data) {
+            console.log(data)
+            console.log(data.data.data.weather.date);
+
+            let date = new Date(data.data.data.date)
+            let volume = data.data.data.content_list[0].volume
+            let itemDate = data.data.data.content_list[0].post_date
+            let forward = data.data.data.content_list[0].forward
+            let imgSrc = data.data.data.content_list[0].img_url
+            let title = data.data.data.content_list[1].title
+            let author = data.data.data.content_list[1].author.user_name
+            let itemforward = data.data.data.content_list[1].forward
+
+
+
+            console.log("aa",title)
+            let formatDate = new Date(itemDate);
+            // console.log("1++"+itemDate)
+            that.day=date.getDate();
+            that.volume=volume;
+            that.forward=forward;
+            that.imgSrc=imgSrc;
+            that.itemDate= formatDate.getMonth()+".  "+formatDate.getFullYear();
+            that.title=title;
+            that.author=author;
+            that.itemforward=itemforward;
+            console.log(date)
+        }).catch(function (err) {
+            console.log(err)
+        })
+
+    },
   data () {
     return {
-      isShow:true,
+        isShow:true,
+        day:'day',
+        volume:'volume',
+        itemDate:'itemDate',
+        forward:'forward',
+        imgSrc:'imgSrc',
+        title:'title',
+        author:'author',
+        itemforward:'itemforward',
       items:[
         {
+
 
         },
         {
@@ -56,11 +105,11 @@ export default {
     }
   },
   methods:{
-    show(data){
-      console.log(data)
-    },
+    // show(data){
+    //   console.log(data)
+    // },
     change(){
-      this.data=!this.data
+
     }
 
   }
@@ -71,22 +120,43 @@ export default {
 <style scoped>
   .home{
     margin-top: 50px;
+
   }
   .home-img-box{
     position: relative;
     height:616px;
     /*width: 750px;*/
-    /*background:url("http://image.wufazhuce.com/FlrbgZBTmUlzeigMz8DXIsWN2MXf" ) no-repeat -262px 0;*/
-    background-size:cover;
+    /*background:rgba(0,0,0,0.5);*/
+
+    text-align: center;
+    overflow: hidden;
+    text-align: center;
+    z-index: 1000;
+  }
+  .home-img-boxbg{
+    position: absolute;
+    top: 0;
+    background: rgba(0,0,0,.3);
+    height:616px;
+    /*width: 750px;*/
+    /*background:rgba(0,0,0,0.5);*/
+
+
+  width: 100%;
+    z-index: 10;
   }
  .home-img-box img{
-   width: 100%;
+  position: absolute;
+   left: -284px;
+
    height: 100%;
    display: block;
+
   }
   .home-text-box{
     position: absolute;
    bottom: 50px;
+    z-index: 100;
   }
   .home-text-box p{
     margin: 0 20px;

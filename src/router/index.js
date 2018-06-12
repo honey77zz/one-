@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Pic from '@/page/Pic'
+import One from '@/page/One'
 import Home from '@/page/Home'
-import Story from '@/page/Story'
+import Article from '@/page/Article'
 import Music from '@/page/Music'
 import Movie from '@/page/Movie'
 import Login from '@/page/Login'
 import About from '@/page/About'
+import Details from '@/page/Details'
 
 Vue.use(Router)
 
@@ -19,13 +20,13 @@ export default new Router({
     },
     {
       path: '/one',
-      name: 'Pic',
-      component: Pic
+      name: 'One',
+      component: One
     },
     {
       path: '/article',
-      name: 'Story',
-      component: Story
+      name: 'Article',
+      component: Article
     },
     {
       path: '/music',
@@ -46,6 +47,11 @@ export default new Router({
       path: '/about',
       name: 'About',
       component: About
+    },
+    {
+      path: '/details',
+      name: 'Details',
+      component: Details
     }
   ]
 })

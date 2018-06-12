@@ -1,5 +1,5 @@
 <template>
-  <div id="pic" style="background:#f6f6f6">
+  <div id="one" style="background:#f6f6f6">
     <ul class="pic_box">
       <li class="card" v-for="i in items" :key="i.id">
         <p class="time">time</p>
@@ -15,7 +15,7 @@
 
 <script>
 export default{
-  name: 'Pic',
+  name: 'One',
   data(){
     return {
       items: [1,2,3,4]
