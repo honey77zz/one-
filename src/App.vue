@@ -25,6 +25,7 @@ export default {
     padding: 0;
     margin: 0;
   }
+
   .topNav{
     height: 54px;
     font-size: 14px;
@@ -35,6 +36,7 @@ export default {
     width: 100%;
     line-height: 54px;
     text-align: center;
+z-index: 100;
   }
   .topNav .fa{
     font-size: 21px;

@@ -1,22 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Pic from '@/page/Pic'
-// import Home from '@/page/Home'
+import Home from '@/page/Home'
 import Story from '@/page/Story'
 import Music from '@/page/Music'
 import Movie from '@/page/Movie'
-// import Login from '@/page/Login'
+import Login from '@/page/Login'
 import About from '@/page/About'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'Home',
-    //   component: Home
-    // },
+    {
+      path: '/',
+      name: 'Home',
+      component: Home
+    },
     {
       path: '/one',
       name: 'Pic',
@@ -37,11 +37,11 @@ export default new Router({
       name: 'Movie',
       component: Movie
     },
-    // {
-    //   path: '/login',
-    //   name: 'Login',
-    //   component: Login
-    // },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
     {
       path: '/about',
       name: 'About',
