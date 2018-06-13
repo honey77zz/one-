@@ -48,18 +48,13 @@ export default{
 </script>
 
 <style>
-  *{
-    padding: 0;
-    margin: 0;
-  }
-
   #nav{
     /*height: 100rem;*/
     position: fixed;
     top:0;
     left:0;
     height: 100vh;
-      width: 188px;
+    width: 188px;
     z-index: 2000;
   }
 
@@ -67,6 +62,7 @@ export default{
     height:100%;
     width: 188px;
     background: #fff;
+    padding-top: 30px;
      /*position: absolute;*/
      /*top: 54px;*/
     /*float: left;*/
@@ -82,9 +78,6 @@ export default{
     color: #333;
     text-align: center;
     padding: 10px 0;
-  }
-  .top_nav .one{
-    /*margin-top: 20px;*/
   }
   .top_nav li:hover{
     background: #1aadef;

@@ -1,70 +1,59 @@
 <template>
   <div id="one" style="background:#f6f6f6">
     <ul class="pic_box">
-      <li class="card" v-for="i in items" :key="i.id">
-        <p class="time">time</p>
-        <p class="count">VOL.2074</p>
-        <img src="../assets/logo.png" alt="">
-        <p class="author">插画|狐狸狐狸鱼</p>
-        <p class="text">我们所度过的每一个日常，也许就是连续发生的奇迹</p>
-        <p class="title">《日常》</p>
+      <li class="card" v-for="i in Oneitems" :key="i.id">
+        <Story :showData="i"></Story>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-export default{
+import Story from '../components/Story';
+// import { mapMutations,mapState } from 'vuex';
+import axios from 'axios';
+export default {
   name: 'One',
+  components: { Story },
+  computed: {
+    // ...mapState( ['Oneitems'] )
+  },
+  methods: {
+    
+  },
+  mounted(){
+    // console.log(this.$store);
+    let self = this;
+    let url = 'http://v3.wufazhuce.com:8000/api/channel/one/0/%E5%8C%97%E4%BA%AC%E5%B8%82';
+    axios.get( url ).then(function( data ){
+        self.Oneitems = [...data.data.data.content_list];
+        // res( data );
+        // console.log( state.Oneitems );
+        
+        // commit( '' )
+    }).catch(function( err ){
+        console.log( err );
+    });
+    // this.$store.dispatch('getOne')
+  },
   data(){
     return {
-      items: [1,2,3,4]
+      Oneitems: []
     }
   }
 }
 </script>
 
-<style>
-  *{
-    padding: 0;
-    margin: 0;
-  }
+<style scoped>
   .pic_box{
     margin-top: 54px;
   }
-  .card{
-    padding: 0 20px;
+  .pic_box .card{
     text-align: center;
-    padding-bottom: 25px;
+    padding: 25px 0;
     margin-bottom: 20px;
     box-shadow: 0px 0px 5px rgba(230,230,230,.7);
     background: #fff;
-  }
-  .time{
-    font-size: 20px;
-    color: #333;
-    line-height: 22px;
-    padding-top: 16px;
-  }
-  .count,.author,.title{
-    font-size: 10px;
-    line-height: 14px;
-    color: #808080;
-  }
-  .card img{
-    display: block;
-    width: 100%;
-    height: 250px;
-    margin-top: 10px;
-  }
-  .author{
-    margin-top: 5px;
-  }
-  .text{
-    font-size: 14px;
-    color: #333;
-    line-height: 26px;
-    margin: 20px 0;
   }
 </style>
 
