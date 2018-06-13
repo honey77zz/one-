@@ -13,7 +13,7 @@
         <span class="span-angle-down"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
       </div>
     </div>
-     <div class="home-text" v-for="item in items">
+     <div class="home-text" v-for="item in items" :key="item.id">
         <div class="aticle">
         <p><a href="#" class="home-link" >{{item.msg}} |</a></p>
           <div class="aticle-link">
@@ -51,8 +51,8 @@ export default {
       let that=this
         let url='http://v3.wufazhuce.com:8000/api/channel/one/0/%E5%8C%97%E4%BA%AC%E5%B8%82';
         this.$http.get(url).then(function (data) {
-            console.log(data)
-            console.log(data.data.data.weather.date);
+            // console.log(data)
+            // console.log(data.data.data.weather.date);
 
             let date = new Date(data.data.data.date)
             let volume = data.data.data.content_list[0].volume
@@ -65,7 +65,7 @@ export default {
 
 
 
-            console.log("aa",title)
+            // console.log("aa",title)
             let formatDate = new Date(itemDate);
             // console.log("1++"+itemDate)
             that.day=date.getDate();
@@ -76,7 +76,7 @@ export default {
             that.title=title;
             that.author=author;
             that.itemforward=itemforward;
-            console.log(date)
+            // console.log(date)
         }).catch(function (err) {
             console.log(err)
         })
