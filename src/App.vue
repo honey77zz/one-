@@ -3,12 +3,12 @@
     <div class="topNav" >
       <i class="fa fa-bars" aria-hidden="true" @click.stop="change"></i>
       <span>一个</span>
-      <i class="fa fa-search" aria-hidden="true"></i>
+      <i class="fa fa-search" aria-hidden="true"  @click.stop="changea"></i>
     </div>
     <transition name="slide-fade">
       <Nav v-if="show" @change="change"></Nav>
     </transition>
-    <Search></Search>
+    <Search v-if="isshow"  ></Search>
     <router-view/>
   </div>
 </template>
@@ -23,12 +23,16 @@ export default {
   components: { Nav,Search },
     data() {
         return {
-            show: false
+            show: false,
+            isshow:false
         };
     },
     methods:{
         change(){
           this.show = !this.show
+        },
+        changea(){
+            this.isshow = !this.isshow
         }
     }
 }

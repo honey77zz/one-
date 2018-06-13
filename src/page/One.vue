@@ -18,9 +18,6 @@ export default {
   computed: {
     // ...mapState( ['Oneitems'] )
   },
-  methods: {
-    
-  },
   mounted(){
     // console.log(this.$store);
     let self = this;
@@ -29,7 +26,7 @@ export default {
         self.Oneitems = [...data.data.data.content_list];
         // res( data );
         // console.log( state.Oneitems );
-        
+
         // commit( '' )
     }).catch(function( err ){
         console.log( err );
@@ -40,7 +37,13 @@ export default {
     return {
       Oneitems: []
     }
-  }
+  },
+    methods:{
+        gotolink(){
+            this.$router.push({path:'/details'})
+        },
+    }
+
 }
 </script>
 

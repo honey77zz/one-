@@ -1,6 +1,6 @@
 <template>
   <div id="nav">
-    <ul class="top_nav">
+    <ul class="top_nav" @click="show =false">
       <li class="one" @click.stop="goone">图文</li>
       <li @click.stop="goarticle">阅读</li>
       <li @click.stop="gomusic">音乐</li>
@@ -48,6 +48,11 @@ export default{
 </script>
 
 <style>
+  *{
+    padding: 0;
+    margin: 0;
+  }
+
   #nav{
     /*height: 100rem;*/
     position: fixed;
@@ -79,6 +84,9 @@ export default{
     text-align: center;
     padding: 10px 0;
   }
+  /* .top_nav .one{
+    margin-top: 20px;
+  } */
   .top_nav li:hover{
     background: #1aadef;
   }

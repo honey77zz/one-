@@ -6,16 +6,16 @@
     <div class="home-img-box">
       <div class="home-img-boxbg"></div>
       <img :src="imgSrc"/>
-      <div class="home-text-box" @click="change" >
+      <div class="home-text-box" @click="gotolink" >
         <p class="day">{{day}}</p>
         <p class="month">{{volume}}&nbsp;|&nbsp;{{itemDate}}</p>
         <p class="content-short">{{forward}}</p>
         <span class="span-angle-down"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
       </div>
     </div>
-     <div class="home-text" v-for="item in items" :key="item.id">
+     <div class="home-text" v-for="item in items" @click="gotolink" :key="item.id">
         <div class="aticle">
-        <p><a href="#" class="home-link" >{{item.msg}} |</a></p>
+        <p><a href="#" class="home-link"  >阅读 |</a></p>
           <div class="aticle-link">
             <p class="aticle-title">{{title}}</p>
             <p class="aticle-auther">作者/{{author}} </p>
@@ -28,7 +28,7 @@
         </div>
         <div class="question"></div>
      </div>
-    <a href="http://localhost:8083/#/one" class="home-more" >更多内容
+    <a  class="home-more"  @click="goone">更多内容
       <i class="fa fa-angle-right" aria-hidden="true"></i>
     </a>
     <div class="bottom">
@@ -105,11 +105,11 @@ export default {
     }
   },
   methods:{
-    // show(data){
-    //   console.log(data)
-    // },
-    change(){
-
+    gotolink(){
+       this.$router.push({path:'/details'})
+     },
+      goone(){
+          this.$router.push({path:'/one'})
     }
 
   }
@@ -121,6 +121,9 @@ export default {
   .home{
     margin-top: 50px;
 
+  }
+  a{
+    text-decoration: none;
   }
   .home-img-box{
     position: relative;

@@ -1,9 +1,9 @@
 <template>
   <div id="search">
-    <div class="search_top">
+    <div class="search_top"v-show="show">
       <input type="text" placeholder="输入作者或标题关键字">
       <i class="fa fa-search" aria-hidden="true"></i>
-      <i class="fa fa-times" aria-hidden="true"></i>
+      <i class="fa fa-times" aria-hidden="true"  @click.stop="chengea"></i>
     </div>
     <div class="search_zhe"></div>
   </div>
@@ -12,6 +12,17 @@
 <script>
   export default{
     name: 'Search',
+      data(){
+        return{
+            show:true
+        }
+      },
+    methods:{
+    chengea(){
+      this.show=!this.show
+    }
+}
+
   };
 
 </script>
@@ -21,7 +32,8 @@
   position: fixed;
   height: 100%;
   top: 0;
-  display: none;
+  /*display: none;*/
+  z-index: 5000;
 }
 .search_top{
   height: 54px;

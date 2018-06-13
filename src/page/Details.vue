@@ -1,31 +1,71 @@
 <template>
     <div class="details">
-        <img src="http://image.wufazhuce.com/FnYP0tkaMwoXPJ7UkTG3yVwRRGlk" class="details-topimg">
+        <img :src="imgSrc" class="details-topimg">
         <p class="details-author">
-            <span>voL.2016</span>
-            摄影 | 远方
+            <span>{{volume}}</span>
+            {{title}}  | 远方
         </p>
-        <p class="details-day">10</p>
-        <p class="details-month">Jun 2018</p>
+        <p class="details-day">{{day}}</p>
+        <p class="details-month"> {{itemDate}}</p>
         <div class="details-line"></div>
-        <p class="details-content">成年人心平气和有时候吧成年人心平气和有时
-            候吧成年人心平气和有时候吧成年人心平气和有时候吧 成年人心平气和有时
-            候吧成年人心平气和有时候吧</p>
+        <p class="details-content">{{forward}}</p>
         <div class="details-donload">
             <a href=""><img src="http://image.wufazhuce.com/app_download.png" alt=""></a>
             <p class="donwload-p">下载[一个]app</p>
         </div>
         <div class="details-footr">
-            <span>上一篇</span>
-            <span>三生三世</span>
-            <span>下一篇</span>
+            <span @click="golist">上一篇</span>
+            <span><i class="fa fa-share" aria-hidden="true"></i> </span>
+            <span @click="golist">下一篇</span>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Details"
+        name: "Details",
+        mounted() {
+
+            let that = this
+            let url='http://v3.wufazhuce.com:8000/api/channel/one/0/%E5%8C%97%E4%BA%AC%E5%B8%82';
+            this.$http.get(url).then(function (data) {
+                console.log(data)
+
+                let imgSrc = data.data.data.content_list[0].img_url
+
+
+                let title = data.data.data.content_list[0].title
+                let date = new Date(data.data.data.date)
+                let itemDate = data.data.data.content_list[0].post_date
+                let volume = data.data.data.content_list[0].volume
+                let forward = data.data.data.content_list[0].forward
+                console.log(title);
+                that.imgSrc=imgSrc;
+
+                that.title=title;
+                let formatDate = new Date(itemDate);
+                // console.log("1++"+itemDate)
+                that.day=date.getDate();
+                that.forward=forward;
+                that.volume=volume;
+                that.itemDate= formatDate.getMonth()+".  "+formatDate.getFullYear();
+            })
+        },
+        data(){
+            return{
+                imgSrc:'imgSrc',
+                forward:'forward',
+                title:'title',
+                day:'day',
+                volume:'volume',
+                itemDate:'itemDate',
+            }
+        },
+        methods:{
+            golist(){
+                this.$router.push({path:'/one'})
+            }
+        }
     }
 </script>
 
