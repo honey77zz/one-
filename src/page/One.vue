@@ -1,49 +1,53 @@
 <template>
   <div id="one" style="background:#f6f6f6">
     <ul class="pic_box">
-      <li class="card" v-for="i in Oneitems" :key="i.id">
+      <li class="card" v-for="i in oneItems" :key="i.id" @click="goDetail">
         <Story :showData="i"></Story>
       </li>
     </ul>
+    <JiaZai></JiaZai>
   </div>
 </template>
 
 <script>
 import Story from '../components/Story';
-// import { mapMutations,mapState } from 'vuex';
-import axios from 'axios';
+import JiaZai from '../components/JiaZai'
+import { mapState } from 'vuex';
 export default {
   name: 'One',
-  components: { Story },
+  components: { Story,JiaZai },
   computed: {
-    // ...mapState( ['Oneitems'] )
+    ...mapState( ['oneItems'] )
   },
   mounted(){
-    // console.log(this.$store);
+    //执行获取数据的函数
+    this.$store.dispatch('getOne');
     let self = this;
-    let url = 'http://v3.wufazhuce.com:8000/api/channel/one/0/%E5%8C%97%E4%BA%AC%E5%B8%82';
-    axios.get( url ).then(function( data ){
-        self.Oneitems = [...data.data.data.content_list];
-        // res( data );
-        // console.log( state.Oneitems );
+    window.onscroll = function( e ){
+      //滚动条的高度
+      let sH = document.documentElement.clientHeight;
+      //滑动de的高度
+      let sT = document.documentElement.scrollTop;
+      //文档的高度
+      let dH = document.body.scrollHeight;
+      // console.log(sH,sT,dH);
+      //判断 如果 sH+sT == dH 加载数据
+      if( sT+sH > dH ){
+        // self.$store.dispatch( 'getOne' );
+        
+      }
 
-        // commit( '' )
-    }).catch(function( err ){
-        console.log( err );
-    });
-    // this.$store.dispatch('getOne')
-  },
-  data(){
-    return {
-      Oneitems: []
     }
   },
-    methods:{
-        gotolink(){
-            this.$router.push({path:'/details'})
-        },
-    }
-
+  beforeRouteLeave( to,from,next ){
+    window.onscroll = null;
+    next()
+  },
+  methods:{
+      goDetail(){
+          this.$router.push({path:'/details'})
+      },
+  }
 }
 </script>
 

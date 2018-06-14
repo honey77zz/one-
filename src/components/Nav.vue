@@ -48,11 +48,6 @@ export default{
 </script>
 
 <style>
-  *{
-    padding: 0;
-    margin: 0;
-  }
-
   #nav{
     /*height: 100rem;*/
     position: fixed;
