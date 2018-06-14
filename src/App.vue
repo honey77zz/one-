@@ -3,17 +3,16 @@
     <!-- 顶部导航 -->
     <div class="topNav" >
       <i class="fa fa-bars" aria-hidden="true" @click.stop="change"></i>
-      <span>一个</span>
+      <span >一个{{title}}</span>
       <i class="fa fa-search" aria-hidden="true"  @click.stop="changea"></i>
     </div>
     <!-- 侧边导航栏 -->
     <transition name="slide-fade">
-      <Nav v-if="show" @change="change"></Nav>
+      <Nav v-if="show" @change="change" @back="ga"></Nav>
     </transition>
     <!-- 搜索框 -->
     <Search v-if="isshow"  ></Search>
-    <Loading v-show="iS"/>
-    <!-- 缓存 -->
+
     <router-view/>
   </div>
 </template>
@@ -21,29 +20,41 @@
 <script>
 import Nav from '@/components/Nav';
 import Search from '@/components/Search';
-import Loading from '@/components/Loading';
-import { mapState } from 'vuex';
 // import axios from 'axios';
 export default {
   name: 'App',
-  components: { Nav,Search,Loading },
-  data() {
-    return {
-        show: false,
-        isshow:false
-    };
-  },
-  computed: mapState({
-    iS: 'isLoad'
-  }),
-  methods:{
-    change(){
-      this.show = !this.show
+
+
+  components: { Nav,Search },
+    // computed:mapState({
+    //     iS: 'isShow'
+    // }),
+    data() {
+        return {
+            show: false,
+            isshow:false,
+
+            title:null
+
+        };
     },
-    changea(){
-      this.isshow = !this.isshow
+    methods:{
+        change(){
+          this.show = !this.show
+        },
+        changea(){
+            this.isshow = !this.isshow
+            // console.log(this.$router.query);
+        },
+        ga(data){
+            console.log('qqqq',data);
+            this.title=data
+
+        },
+        mounted(){
+
+        },
     }
-  }
 }
 </script>
 

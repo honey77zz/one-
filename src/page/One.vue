@@ -5,7 +5,6 @@
         <Story :showData="i"></Story>
       </li>
     </ul>
-    <JiaZai></JiaZai>
   </div>
 </template>
 
@@ -34,7 +33,7 @@ export default {
       //判断 如果 sH+sT == dH 加载数据
       if( sT+sH > dH ){
         // self.$store.dispatch( 'getOne' );
-        
+
       }
 
     }

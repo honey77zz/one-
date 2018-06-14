@@ -2,7 +2,7 @@
   <div class="home">
     <!--<router-link  to="h1"  @backd="show" @click="change">跳转到 home 的 h1</router-link>-->
     <!--<router-view></router-view>-->
-
+    <Loading v-show="isShow"/>
     <div class="home-img-box">
       <div class="home-img-boxbg"></div>
       <img :src="imgSrc"/>
@@ -37,15 +37,22 @@
         <span class="bottom-hu">沪公安网备31010502000462</span>
       </a>
     </div>
+
   </div>
 </template>
 
 <script>
+    import Loading from "./Loading";
+    // import { mapState } from 'vuex'
+
 export default {
   name: 'Home',
-    // router,
-  mounted(){
 
+    components: { Loading},
+
+
+    mounted(){
+        // console.log(this.$store.state.isShow)
       let that=this
         let url='http://v3.wufazhuce.com:8000/api/channel/one/0/%E5%8C%97%E4%BA%AC%E5%B8%82';
         this.$http.get(url).then(function (data) {

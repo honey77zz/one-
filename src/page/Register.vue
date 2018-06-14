@@ -1,69 +1,65 @@
 <template>
-    <div id="login">
+    <div id="register">
       <img src="../images/login_head.png" alt="">
       <div class="login-box">
         <div class="user">
           <span class="fa-user-spanl"><i class="fa fa-user-o" aria-hidden="true"></i></span>
           <input type='text' ref="input1" name="username" id="username" placeholder="请输入手机号码" />
-          <span class="fa-user-spanr"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+          <!--<span class="fa-user-spanr"><i class="fa fa-angle-down" aria-hidden="true"></i></span>-->
         </div>
         <div class="password">
           <span class="fa-user-spanl"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
           <input type='password'  ref="input2" name="pwd" id="pwd" placeholder="请输入密码" />
-          <span class="fa-user-spanr"><i class="fa fa-eye" aria-hidden="true"></i></span>
+          <!--<span class="fa-user-spanr"><i class="fa fa-eye" aria-hidden="true"></i></span>-->
         </div>
-        <span  class="login-fgo"><a  class="login-fg" href="">忘记密码？</a></span>
+        <!--<span  class="login-fgo"><a  class="login-fg" href="">忘记密码？</a></span>-->
         <div class="login-log">
-          <input type="button" name="btn" id="btn" value="登录"  @click="add"/>
+          <input type="button" name="btn" id="btn" value="注册"  />
           <!--<input type="button" name="btn" id="btn2" value="注册"  v-show="isShow"/>-->
         </div>
-        <p class="login-fgo"> <a  class="login-fg1" @click="goregister">还有账号？立即注册</a></p>
-        <p class="login-fgo fgo"><a href="" class="login-fg2">登录即代表您同意用户服务协议</a></p>
+        <!--<p class="login-fgo"> <a href="" class="login-fg1">还有账号？立即注册</a></p>-->
+        <p class="login-fgo fgo"><a href="" class="login-fg2">注册即代表您同意用户服务协议</a></p>
       </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Login",
+        name: "Register",
       data(){
           return{
             isShow:true
           }
       },
-        methods:{
-            add(){
-                let uname =this.$refs.input1.value
-                let upwd =this.$refs.input2.value
-                console.log(upwd);
-              let  myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
-              let  myreg1=1111;
-                if(myreg.test(uname) && (upwd=1111)){
-                  alert('登录成功')
-                 }
-                    else{
-                    alert('请输入正确手机号')
-                }
-               // else if(myreg.test(myreg1)){
-               //     alert('登陆成功')
-               // }
-            },
-            goregister(){
-              this.$router.push('/register')
-            }
-        }
+        // methods:{
+        //     add(){
+        //         let uname =this.$refs.input1.value
+        //         let upwd =this.$refs.input2.value
+        //         console.log(upwd);
+        //       let  myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+        //       let  myreg1=1111;
+        //         if(myreg.test(uname) && (upwd=1111)){
+        //           alert('登录成功')
+        //          }
+        //             // else{
+        //         //     alert('请输入密码')
+        //         // }
+        //        // else if(myreg.test(myreg1)){
+        //        //     alert('登陆成功')
+        //        // }
+        //     }
+        // }
     }
 
 </script>
 
 <style scoped>
 
-  #login{
+  #register{
     margin-top: 50px;
-
   }
 
-  #login img{
+  #register img{
     width: 100%;
   }
   a{
@@ -135,7 +131,7 @@
     font-size: 18px;
     color: #fff;
   }
-  .login-fg1{
+  .login-fg2{
     display: block;
     font-size: 16px;
     position: absolute;
@@ -143,7 +139,7 @@
     color: #2f2f2f;
     line-height: 30px;
   }
-  .login-fg2{
+  .login-fg1{
     display: block;
     font-size: 16px;
     position: absolute;

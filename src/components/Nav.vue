@@ -1,47 +1,69 @@
 <template>
   <div id="nav">
     <ul class="top_nav" @click="show =false">
-      <li class="one" @click.stop="goone">图文</li>
-      <li @click.stop="goarticle">阅读</li>
-      <li @click.stop="gomusic">音乐</li>
-      <li @click.stop="gomovie">影视</li>
-      <li @click.stop="gologin">登录/注册</li>
-      <li @click.stop="goabout">关于</li>
+      <li class="one" @click.stop="goone">{{title}}</li>
+      <li @click.stop="goarticle">{{title1}}</li>
+      <li @click.stop="gomusic">{{title2}}</li>
+      <li @click.stop="gomovie">{{title3}}</li>
+      <li @click.stop="gologin">{{title4}}/注册</li>
+      <li @click.stop="goabout">{{title5}}</li>
     </ul>
   </div>
 </template>
 
 <script>
+
 export default{
   name: 'Nav',
     // liShow:false,
+    data(){
+      return{
+        // title:null
+          title:'图文',
+          title1:'阅读',
+          title2:'音乐',
+          title3:'影视',
+          title4:'登录',
+          title5:'关于',
+
+
+      }
+    },
     methods:{
       after(){
           this.$emit("change")
       },
         goone(){
-            this.$router.push({path:'/one'})
+          // title:'tuwen'
+          //   this.$router.push({path:'/one/'})
+            this.$router.push({name:'One'});
             this.after()
+            this.$emit("back",this.title)
         },
         goarticle(){
             this.$router.push({path:'/article'})
             this.after()
+            this.$emit("back",this.title1)
         },
         gomusic(){
             this.$router.push({path:'/music'})
             this.after()
+            this.$emit("back",this.title2)
         },
         gomovie(){
             this.$router.push({path:'/movie'})
             this.after()
+            this.$emit("back",this.title3)
         },
         gologin(){
             this.$router.push({path:'/login'})
             this.after()
+            this.$emit("back",this.title4)
         },
         goabout(){
             this.$router.push({path:'/about'})
             this.after()
+            this.$emit("back",this.title5)
         },
     }
 }

@@ -14,7 +14,7 @@ export default{
   name: 'Story',
   props: [ 'showData' ],
   mounted () {
-    //   console.log(this.showData);
+     console.log(this.showData);
   },
   data(){
       return {

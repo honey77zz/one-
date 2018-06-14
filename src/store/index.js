@@ -25,7 +25,7 @@ export default new Vuex.Store({
               //原数组
               let str = [...data.data.data.content_list];
               console.log(str);
-              
+
               //随机去掉一条数据
               let num  = parseInt(Math.random() * str.length);
               let airDel = str.splice(str.length-num,1)[0];
