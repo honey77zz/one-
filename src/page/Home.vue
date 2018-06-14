@@ -37,16 +37,14 @@
         <span class="bottom-hu">沪公安网备31010502000462</span>
       </a>
     </div>
-
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'Home',
     // router,
-    mounted(){
+  mounted(){
 
       let that=this
         let url='http://v3.wufazhuce.com:8000/api/channel/one/0/%E5%8C%97%E4%BA%AC%E5%B8%82';

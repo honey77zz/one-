@@ -29,7 +29,7 @@
             let that = this
             let url='http://v3.wufazhuce.com:8000/api/channel/one/0/%E5%8C%97%E4%BA%AC%E5%B8%82';
             this.$http.get(url).then(function (data) {
-                console.log(data)
+                // console.log(data)
 
                 let imgSrc = data.data.data.content_list[0].img_url
 
