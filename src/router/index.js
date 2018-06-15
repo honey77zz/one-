@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Mint from 'mint-ui'
 import Router from 'vue-router'
 import One from '@/page/One'
 import Home from '@/page/Home'
@@ -10,6 +11,7 @@ import About from '@/page/About'
 import Details from '@/page/Details'
 import Register from '@/page/Register'
 Vue.use(Router)
+Vue.use(Mint)
 
 export default new Router({
   routes: [

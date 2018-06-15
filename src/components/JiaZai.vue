@@ -7,7 +7,6 @@
 <script>
     export default{
         name: 'JiaZai',
-        props: ['isShow']
     };
 
 </script>

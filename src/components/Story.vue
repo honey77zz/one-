@@ -14,11 +14,11 @@ export default{
   name: 'Story',
   props: [ 'showData' ],
   mounted () {
-     console.log(this.showData);
+    //  console.log(this.showData);
   },
   data(){
       return {
-          time: this.showData.post_date.split(' ')[0].replace( /-/g,' / ' )     
+          time: this.showData.post_date.split(' ')[0].replace( /-/g,' / ' )
       }
   }
 }
