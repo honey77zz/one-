@@ -20,6 +20,7 @@ export default{
   mounted(){
 
     this.$store.dispatch('getOne').then((data) =>{});
+
   }
 }
 </script>

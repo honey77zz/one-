@@ -7,7 +7,11 @@
       <div class="ge_img_bg"></div>
       <div class="ge_img_pic">
         <img :src="geData.img_url" alt="">
-        <div class="ge_img_pic_icon"></div>
+        <div class="ge_img_pic_icon" @click="play">
+          <video   name="media">
+              <source :src="song" type="audio/mpeg" />
+          </video>
+        </div>
       </div>
     </div>
     <p class="happy">{{musicTitle}}&nbsp;|&nbsp;{{subtitle}}</p>
@@ -27,8 +31,20 @@ export default{
     return{
           geTime: this.geData.post_date.split(' ')[0].replace( /-/g,' / ' ),
           subtitle: this.geData.subtitle.split( ':' )[1],
-          musicTitle: this.geData.share_info.title.split( ':' )[1]
+          musicTitle: this.geData.share_info.title.split( ':' )[1],
+      song:'song'
 
+    }
+  },
+  methods:{
+    play(){
+      let that=this
+      let url ='http://v3.wufazhuce.com:8000/api/music/htmlcontent/2679'
+      this.$http.get(url).then(function (data) {
+
+        console.log(data.data.data.music_id);
+        that.song=data.data.data.music_id
+      })
     }
   }
 }
@@ -48,7 +64,7 @@ export default{
     color: #000;
     margin-top: 20px;
     padding: 0 20px;
-    
+
   }
   .ge .author{
     font-size: 16px;
@@ -56,7 +72,7 @@ export default{
     color: #808080;
     margin-top: 10px;
     padding: 0 20px;
-    
+
   }
   .ge .ge_img{
     width: 100%;
@@ -106,14 +122,14 @@ export default{
     color: #808080;
     margin-top: 10px;
     padding: 0 20px;
-    
+
   }
   .ge .happy{
     font-size:13px;
     line-height: 28px;
     color: #808080;
     padding: 0 20px;
-    
+
   }
   .ge .time{
     font-size: 13px;
@@ -121,7 +137,7 @@ export default{
     color: #808080;
     margin-top: 20px;
     padding: 0 20px;
-    
+
   }
 </style>
 
