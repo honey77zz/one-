@@ -22,33 +22,36 @@
 </template>
 
 <script>
+
     export default {
         name: "Details",
+
         mounted() {
-
-            let that = this
-            let url='http://v3.wufazhuce.com:8000/api/channel/one/0/%E5%8C%97%E4%BA%AC%E5%B8%82';
+          console.log(this.$route.query.img_url);
+          let img=this.$route.query.img_url
+          // this.$store.dispatch('getOne');
+          let that = this
+           let url ='http://v3.wufazhuce.com:8000/api/channel/one/0/%E5%8C%97%E4%BA%AC%E5%B8%82'
             this.$http.get(url).then(function (data) {
-                // console.log(data)
+                 console.log('2222',data)
 
-                let imgSrc = data.data.data.content_list[0].img_url
+              let date = new Date(data.data.data.date)
+              let volume = data.data.data.content_list[0].volume
+              let itemDate = data.data.data.content_list[0].post_date
+              let forward = data.data.data.content_list[0].forward
+              let title = data.data.data.content_list[0].title
+              let author = data.data.data.content_list[1].author.user_name
+              let itemforward = data.data.data.content_list[1].forward
+              let formatDate = new Date(itemDate);
+              that.day=date.getDate();
+              that.volume=volume;
+              that.forward=forward;
+              that.imgSrc=img;
+              that.itemDate= formatDate.getMonth()+".  "+formatDate.getFullYear();
+              that.title=title;
+              that.author=author;
+              that.itemforward=itemforward;
 
-
-                let title = data.data.data.content_list[0].title
-                let date = new Date(data.data.data.date)
-                let itemDate = data.data.data.content_list[0].post_date
-                let volume = data.data.data.content_list[0].volume
-                let forward = data.data.data.content_list[0].forward
-                console.log(title);
-                that.imgSrc=imgSrc;
-
-                that.title=title;
-                let formatDate = new Date(itemDate);
-                // console.log("1++"+itemDate)
-                that.day=date.getDate();
-                that.forward=forward;
-                that.volume=volume;
-                that.itemDate= formatDate.getMonth()+".  "+formatDate.getFullYear();
             })
         },
         data(){

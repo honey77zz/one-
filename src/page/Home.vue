@@ -5,22 +5,22 @@
     <Loading v-show="isShow"/>
     <div class="home-img-box">
       <div class="home-img-boxbg"></div>
-      <img :src="imgSrc"/>
-      <div class="home-text-box" @click="gotolink" >
+      <img :src="home.img_url"/>
+      <div class="home-text-box" @click="gotolink(home.content_id,home.category,home.img_url)" >
         <p class="day">{{day}}</p>
-        <p class="month">{{volume}}&nbsp;|&nbsp;{{itemDate}}</p>
-        <p class="content-short">{{forward}}</p>
+        <p class="month">{{home.volume}}&nbsp;|&nbsp;{{itemDate}}</p>
+        <p class="content-short">{{home.forward}}</p>
         <span class="span-angle-down"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
       </div>
     </div>
-     <div class="home-text" v-for="item in items" @click="gotolink" :key="item.id">
+     <div class="home-text" v-for="i in homeItems" @click="gotolink(home.content_id,home.category,home.img_url)" :key="i.id">
         <div class="aticle">
         <p><a href="#" class="home-link"  >阅读 |</a></p>
           <div class="aticle-link">
-            <p class="aticle-title">{{title}}</p>
-            <p class="aticle-auther">作者/{{author}} </p>
+            <p class="aticle-title">{{i.title}}</p>
+            <p class="aticle-auther">作者/{{i.author.user_name}} </p>
             <p class="aticle-content">
-              <i >{{itemforward}}</i>
+              <i >{{i.forward}}</i>
               <!--<i>——海因莱因</i>-->
             </p>
             <p class="aticle-more"><a href="">阅读全文</a></p>
@@ -42,76 +42,35 @@
 </template>
 
 <script>
+
     import Loading from "./Loading";
-    // import { mapState } from 'vuex'
+    import { mapState } from 'vuex'
 
 export default {
   name: 'Home',
 
     components: { Loading},
-
+  computed: {
+    ...mapState( ['home','homeItems','day','itemDate'] )
+  },
 
     mounted(){
-        // console.log(this.$store.state.isShow)
-      let that=this
-        let url='http://v3.wufazhuce.com:8000/api/channel/one/0/%E5%8C%97%E4%BA%AC%E5%B8%82';
-        this.$http.get(url).then(function (data) {
-            // console.log(data)
-            // console.log(data.data.data.weather.date);
+      this.$store.dispatch('getOne');
 
-            let date = new Date(data.data.data.date)
-            let volume = data.data.data.content_list[0].volume
-            let itemDate = data.data.data.content_list[0].post_date
-            let forward = data.data.data.content_list[0].forward
-            let imgSrc = data.data.data.content_list[0].img_url
-            let title = data.data.data.content_list[1].title
-            let author = data.data.data.content_list[1].author.user_name
-            let itemforward = data.data.data.content_list[1].forward
+      console.log('yyy',this.home.post_date)
 
-
-
-            // console.log("aa",title)
-            let formatDate = new Date(itemDate);
-            // console.log("1++"+itemDate)
-            that.day=date.getDate();
-            that.volume=volume;
-            that.forward=forward;
-            that.imgSrc=imgSrc;
-            that.itemDate= formatDate.getMonth()+".  "+formatDate.getFullYear();
-            that.title=title;
-            that.author=author;
-            that.itemforward=itemforward;
-            // console.log(date)
-        }).catch(function (err) {
-            console.log(err)
-        })
 
     },
   data () {
     return {
         isShow:true,
-        day:'day',
-        volume:'volume',
-        itemDate:'itemDate',
-        forward:'forward',
-        imgSrc:'imgSrc',
-        title:'title',
-        author:'author',
-        itemforward:'itemforward',
-      items:[
-        {
+        // backgroundImage: url(home.img_url),
 
-
-        },
-        {
-
-        }
-      ]
     }
   },
   methods:{
-    gotolink(){
-       this.$router.push({path:'/details'})
+    gotolink(id,category,img_url){
+      this.$router.push({path:'/details',query:{id:id,category:category,img_url:img_url}})
      },
       goone(){
           this.$router.push({path:'/one'})
@@ -135,6 +94,7 @@ export default {
     height:616px;
     /*width: 750px;*/
     /*background:rgba(0,0,0,0.5);*/
+    /*background-image: url(home.img_url);*/
 
     text-align: center;
     overflow: hidden;
@@ -156,7 +116,7 @@ export default {
  .home-img-box img{
   position: absolute;
    left: -284px;
-
+   /*width: 100%;*/
    height: 100%;
    display: block;
 

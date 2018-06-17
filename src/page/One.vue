@@ -2,7 +2,7 @@
   <div id="one" style="background:#f6f6f6">
     <ul class="pic_box" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
   infinite-scroll-distance="5" infinite-scroll-immediate-check="true">
-      <li class="card" v-for="i in oneItems" :key="i.id" @click="goDetail">
+      <li class="card" v-for="i in oneItems" :key="i.id" @click="goDetail(i.content_id,i.category,i.img_url)">
         <Story :showData="i"></Story>
       </li>
       <load></load>
@@ -23,10 +23,14 @@ export default {
   mounted(){
     //执行获取数据的函数
     this.$store.dispatch('getOne');
+    //console.log('22333',this.$store.state.oneItems)
+    console.log('hhh',this.$store.state.oneItems)
+
   },
   methods:{
-      goDetail(){
-          this.$router.push({path:'/details'})
+      goDetail(id,category,img_url){
+          //console.log(data)
+          this.$router.push({path:'/details',query:{id:id,category:category,img_url:img_url}})
       },
       loadMore() {
         this.loading = true;

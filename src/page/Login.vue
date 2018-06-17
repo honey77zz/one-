@@ -26,6 +26,7 @@
 <script>
     export default {
         name: "Login",
+
       data(){
           return{
             isShow:true
@@ -35,18 +36,29 @@
             add(){
                 let uname =this.$refs.input1.value
                 let upwd =this.$refs.input2.value
-                console.log(upwd);
-              let  myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
-              let  myreg1=1111;
-                if(myreg.test(uname) && (upwd=1111)){
-                  alert('登录成功')
-                 }
-                    else{
-                    alert('请输入正确手机号')
+                let tname='',tpwd='';
+                let str=document.cookie;
+                console.log(str);
+                let arr=str.split('; ');
+                console.log(arr);
+                for(var i=0;i<arr.length;i++){
+                    let item=arr[i].split('=');
+                    console.log(item);
+                    if(item[0]=='name'){
+                        tname=item[1]
+                    }
+                    if(item[0]=='pwd'){
+                        tpwd=item[1]
+                    }
                 }
-               // else if(myreg.test(myreg1)){
-               //     alert('登陆成功')
-               // }
+                let iname=uname
+                let ipwd=upwd
+                if(tname==iname && tpwd==ipwd){
+                    alert('登陆成功')
+                }else{
+                    alert('用户名或密码错误')
+                }
+
             },
             goregister(){
               this.$router.push('/register')

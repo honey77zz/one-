@@ -3,18 +3,18 @@
       <img src="../images/login_head.png" alt="">
       <div class="login-box">
         <div class="user">
-          <span class="fa-user-spanl"><i class="fa fa-user-o" aria-hidden="true"></i></span>
+          <span class="fa-user-spanl"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
           <input type='text' ref="input1" name="username" id="username" placeholder="请输入手机号码" />
           <!--<span class="fa-user-spanr"><i class="fa fa-angle-down" aria-hidden="true"></i></span>-->
         </div>
         <div class="password">
-          <span class="fa-user-spanl"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+          <span class="fa-user-spanl"><i class="fa fa-lock" aria-hidden="true"></i></span>
           <input type='password'  ref="input2" name="pwd" id="pwd" placeholder="请输入密码" />
           <!--<span class="fa-user-spanr"><i class="fa fa-eye" aria-hidden="true"></i></span>-->
         </div>
         <!--<span  class="login-fgo"><a  class="login-fg" href="">忘记密码？</a></span>-->
         <div class="login-log">
-          <input type="button" name="btn" id="btn" value="注册"  />
+          <input type="button" name="btn" id="btn" value="注册"  @click="add1" />
           <!--<input type="button" name="btn" id="btn2" value="注册"  v-show="isShow"/>-->
         </div>
         <!--<p class="login-fgo"> <a href="" class="login-fg1">还有账号？立即注册</a></p>-->
@@ -26,29 +26,28 @@
 <script>
     export default {
         name: "Register",
+
       data(){
           return{
             isShow:true
           }
       },
-        // methods:{
-        //     add(){
-        //         let uname =this.$refs.input1.value
-        //         let upwd =this.$refs.input2.value
-        //         console.log(upwd);
-        //       let  myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
-        //       let  myreg1=1111;
-        //         if(myreg.test(uname) && (upwd=1111)){
-        //           alert('登录成功')
-        //          }
-        //             // else{
-        //         //     alert('请输入密码')
-        //         // }
-        //        // else if(myreg.test(myreg1)){
-        //        //     alert('登陆成功')
-        //        // }
-        //     }
-        // }
+        methods:{
+            add1(){
+                let uname =this.$refs.input1.value
+                let upwd =this.$refs.input2.value
+                let  myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+                let mypwd=/^\d{6}$/
+                console.log(uname);
+                console.log(upwd);
+                if(myreg.test(uname) && mypwd.test(upwd)){
+                    document.cookie='name='+uname
+                    document.cookie='pwd='+upwd
+                    this.$router.push({path:'/login'})
+                }
+
+            }
+        }
     }
 
 </script>
